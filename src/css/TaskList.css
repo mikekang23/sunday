@@ -1,0 +1,41 @@
+.taskRow {
+    border-left-color: blue;
+    border-left-style: solid;
+    border-left-width:medium;
+}
+
+div.ownerField {
+  padding-left: 50px;
+}
+
+img.avatar {
+  width: 30px;
+  float:left;
+  position:absolute;
+  top:5px;
+  left:15px;
+}
+
+img.avatar-default {
+  width: 30px;
+  float:left;
+  position:absolute;
+  top:7px;
+  left:15px;
+}
+
+/* option {
+  background-color: rgba(74, 200, 231, 0.5);
+}
+
+select option[value="Not On Target"] {
+  background: rgba(170, 90, 235, 1)
+}
+
+select option[value="Stuck"] {
+  background: rgba(231, 102, 95, 0);
+}
+
+select option[value="Done!"] {
+  background: rgba(119, 196, 129, 1);
+} */

@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import Navbar from './components/Navbar';
+import TaskList from './components/TaskList';
+import { addTask } from "./redux/actions";
+import { getTasks } from './redux/selectors';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// import './App.css';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleAddTask = () => {
+    this.props.addTask()
+    console.log(this.props)
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Navbar />
+        <div className="container py-4">
+          <div className="row py-3">
+            <button
+              type="button" className="btn btn-outline-primary"
+              onClick={this.handleAddTask}
+            >
+              New Task
+            </button>
+          </div>
+          <div className="row py-2">
+            <div className="col-sm-6 py-2">
+              Description
+            </div>
+            <div className="col-sm-2 py-2">
+              Owner
+            </div>
+            <div className="col-sm-2 py-2">
+              Status
+            </div>
+            <div className="col-sm-2 py-2">
+              Due Date
+            </div>
+          </div>
+          <TaskList />
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(state){
+  const tasks = getTasks(state);
+  return {tasks}
+}
+
+export default connect(mapStateToProps, {addTask})(App);
