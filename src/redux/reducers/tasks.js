@@ -53,7 +53,7 @@ export default function(state = initialState, action) {
             description: "",
             owner: null,
             status: null,
-            duedate: ""
+            duedate: new Date()
           }
         }
       }

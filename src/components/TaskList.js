@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { descriptionChange, ownerChange, statusChange, dueDateChange } from "../redux/actions"
 import '../css/TaskList.css';
+import DueDate from './DueDate';
 
 class TaskList extends React.Component {
   constructor(props){
@@ -48,10 +49,10 @@ class TaskList extends React.Component {
               {this.props.tasks[id].owner ? <img className="avatar" src={process.env.PUBLIC_URL + '/img/' + this.props.tasks[id].owner + '.png'}/> :  <img className="avatar-default" src={process.env.PUBLIC_URL + '/img/default.png'}/>}
               <select
                 className="form-control"
-                value={this.props.tasks[id].owner}
                 onChange={(e) => this.handleOwnerChange(id, e.target.value)}
+                defaultValue={'default'}
               >
-                <option disabled selected>Choose</option>
+                <option disabled value="default">Choose</option>
                 {this.props.owners.map((person) => {
                   return <option value={person.name} key={person.id}>{person.name}</option>
                 })}
@@ -60,8 +61,8 @@ class TaskList extends React.Component {
             <div className="col-sm-2 py-1 statusField">
               <select
                 className="form-control"
-                value={this.props.tasks[id].status}
                 onChange={(e) => this.handleStatusChange(id, e.target.value)}
+                defaultValue={'default'}
                 style={
                   this.props.tasks[id].status === 'On Target'
                   ?
@@ -82,7 +83,7 @@ class TaskList extends React.Component {
                   {color: 'white', backgroundColor: '#36454F'}
                   }
                 >
-                <option disabled selected>Not Started Yet</option>
+                <option disabled value="default">Not Started Yet</option>
                 {this.props.status.map((status) => {
                   return <option value={status.title} key={status.id}>{status.title}</option>
                 })}
@@ -90,11 +91,8 @@ class TaskList extends React.Component {
             </div>
 
             <div className="col-sm-2 py-1">
-              <input
-                className="form-control"
-                type="text"
-                value={this.props.tasks[id].duedate}
-                onChange={(e) => this.handleDueDateChange(id, e.target.value)}
+              <DueDate
+                taskId={id}
               />
             </div>
           </div>
