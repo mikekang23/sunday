@@ -10,6 +10,23 @@ import { getTasks } from './redux/selectors';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      msg: null
+    }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:5000/api')
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        console.log(data.msg)
+        this.setState({
+          msg: data.msg
+        })
+      })
   }
 
   handleAddTask = () => {
@@ -21,6 +38,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar />
+        {this.state.msg}
+        asdf
         <div className="container py-4">
           <div className="row py-3">
             <button
